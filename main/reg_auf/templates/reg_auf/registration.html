@@ -1,0 +1,14 @@
+{% extends  "reg_auf/base.html"%}
+{% block title%} Регистрация {% endblock%}
+{% block content %}
+<h1>Регистрация</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for f in form%}
+    <p><label class="form-label" for="{{f.id_for_label}}">{{f.label}}:</label>{{f}}</p>
+    <div style="color:red">{{f.errors}}</div>
+    {% endfor %}
+    <!--        {{ form.as_p }}-->
+    <button type="submit">Зарегистрироваться</button>
+</form>
+{% endblock %}
