@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href=" {% static 'feedback/forms.css' %}">
+
+{% endblock %}
+{% block title %}
+    Гороскоп для {{sign}}
+{% endblock %}
+
+{% block content%}
+    {% include "includes/navbar.html" %}
+    <h1>Hello после navbar</h1>
+{% endblock %}
+

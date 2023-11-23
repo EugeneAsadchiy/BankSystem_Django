@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/my_base.css'%}">
+    {% block css_additional %} {% endblock %}
+</head>
+<body>
+
+    {% include "navbar.html" %}
+<!--    {% include "navbar.html" %}-->
+
+    {% block content%} {% endblock %}
+
+
+    <section id="main-content">
+    <h2>О нас</h2>
+    <p>Краткое описание вашего банка и его ценностей.</p>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2023 Ваш Банк. Все права защищены.</p>
+    </footer>
+</body>
+</html>

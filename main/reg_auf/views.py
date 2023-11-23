@@ -1,9 +1,10 @@
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
+from django.shortcuts import render
 
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm, LoginUserForm
 from .models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+# from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.base import TemplateView
@@ -19,7 +20,7 @@ class RegisterUser(CreateView):
 
 
 class LoginUser(LoginView):
-    form_class = AuthenticationForm
+    form_class = LoginUserForm
     # success_url = reverse_lazy('/main')
     template_name = 'reg_auf/login.html'
 
@@ -28,4 +29,8 @@ class LoginUser(LoginView):
 
 
 def main(request):
-    return HttpResponse("Главная страница")
+    return render(request, 'base.html')
+
+
+
+
