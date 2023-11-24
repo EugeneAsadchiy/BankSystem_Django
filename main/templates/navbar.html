@@ -7,7 +7,20 @@
         <li><a href="#insurance">Страхование</a></li>
         <li><a href="#investments">Инвестиции</a></li>
         <li><a href="#contact">Контакты</a></li>
+
+        {% if request.user.is_authenticated %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">{{ user.username }}</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <!-- Пункты меню для авторизованных пользователей -->
+                    <a class="dropdown-item" href="#">Пункт 1121213123131hghfghgfh</a>
+                    <a class="dropdown-item" href="#">Пункт 2</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                </div>
+            </li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Вход</a></li>
+        {% endif %}
     </ul>
 </nav>
-
-

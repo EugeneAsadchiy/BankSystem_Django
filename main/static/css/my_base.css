@@ -1,16 +1,6 @@
-footer {
-    background-color: #f4f4f4;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #6e5858;
-}
-div{
-
+#main-content {
+    max-width: 800px;
+    margin: 20px auto;
 }
 header {
     background-color: #007BFF;
@@ -18,34 +8,67 @@ header {
     text-align: center;
     padding: 1em 0;
 }
-
+footer {
+    background-color: #f4f4f4;
+    padding: 1em 0;
+    text-align: center;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #6e5858;
+}
+/* Стили для выпадающего меню */
+/* Стили для выпадающего меню */
 .centered-nav {
     text-align: center;
 }
 
 .centered-nav ul {
-    display: inline-block;
-    list-style-type: none;
     padding: 0;
+    list-style: none;
 }
 
 .centered-nav li {
-    display: inline;
+    display: inline-block;
     margin-right: 20px;
 }
 
 .centered-nav a {
     text-decoration: none;
-    color: black;
+    color: #fbfbfb;
+    font-weight: bold;
 }
 
-#main-content {
-    max-width: 800px;
-    margin: 20px auto;
+.centered-nav a:hover {
+    color: #a1a1a1; /* Цвет ссылки при наведении */
 }
 
-footer {
-    background-color: #f4f4f4;
-    padding: 1em 0;
-    text-align: center;
+.centered-nav li.dropdown {
+    position: relative;
+}
+
+.centered-nav li.dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color:  #6e5858;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.centered-nav li.dropdown:hover .dropdown-toggle {
+    color: #a1a1a1; /* Цвет ссылки при наведении */
+}
+
+.centered-nav li.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.centered-nav li.dropdown .dropdown-menu a:hover {
+    background-color: #6e5858; /* Цвет фона при наведении на пункт меню */
+    color: #a1a1a1; /* Цвет текста при наведении на пункт меню */
 }
