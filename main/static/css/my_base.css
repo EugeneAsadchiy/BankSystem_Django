@@ -58,7 +58,23 @@ body {
     background-color:  #6e5858;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    white-space: nowrap;
+    width: max-content;
+    min-width: 100%;
+    flex-direction: column; /* Удалите этот стиль */
 }
+.centered-nav li.dropdown .dropdown-menu a {
+    display: block;
+    padding: 3px; /* Добавьте отступы между пунктами меню */
+    color: #fbfbfb;
+}
+
+.centered-nav li.dropdown .dropdown-menu a:hover {
+    background-color: #6e5858;
+    color: #a1a1a1;
+}
+
+
 
 .centered-nav li.dropdown:hover .dropdown-toggle {
     color: #a1a1a1; /* Цвет ссылки при наведении */

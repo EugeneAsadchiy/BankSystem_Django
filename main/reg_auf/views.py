@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from .forms import RegisterUserForm, LoginUserForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView, CreateView, UpdateView
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -15,7 +16,6 @@ class RegisterUser(CreateView):
 
 class LoginUser(LoginView):
     form_class = LoginUserForm
-    # success_url = reverse_lazy('/main')
     template_name = 'reg_auf/login.html'
 
     def get_success_url(self):
@@ -25,6 +25,15 @@ class LoginUser(LoginView):
 def logout_user(request):
     logout(request)
     return redirect("login")
+
+
+def change_password(request):
+    u = User.objects.get(username="arseniy")
+    print(u.id)
+    u.first_name = "butko"
+    # u.set_first_name("butko")
+    u.save()
+    return render(request, 'base.html')
 
 
 def main(request):
