@@ -1,0 +1,26 @@
+import random
+import string
+
+from django.db import models
+from django.contrib.auth.models import User
+from bank_account.models import Account
+
+
+class Card(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    linked_account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    number = models.CharField(max_length=16, default=0)  # Предполагается, что номер карточки состоит из 16 символов
+    expiry_date = models.DateField()
+    cvv = models.CharField(max_length=3, default=0)
+
+    def save(self, *args, **kwargs):
+        # Генерируем случайный номер карточки
+        self.number = ''.join(random.choice(string.digits) for _ in range(16))
+
+        # Генерируем случайный CVV
+        self.cvv = ''.join(random.choice(string.digits) for _ in range(3))
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.linked_account.account_number} | {self.expiry_date} | {self.cvv}"
