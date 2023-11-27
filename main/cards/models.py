@@ -1,5 +1,6 @@
 import random
 import string
+from datetime import timedelta
 
 from django.db import models, IntegrityError
 
@@ -13,13 +14,16 @@ class Card(models.Model):
     linked_account = models.ForeignKey(Account, on_delete=models.CASCADE)
     number = models.CharField(max_length=16,
                               default="random")  # Предполагается, что номер карточки состоит из 16 символов
-    expiry_date = models.DateField()
+    expiry_date = models.DateField(default="admin check")
+    expiry_years = models.PositiveIntegerField(default=0)
     cvv = models.CharField(max_length=3, default="random")
 
     def save(self, *args, **kwargs):
         self.user = self.linked_account.user.username
-        print(self.user)
-        # Генерируем случайный номер карточки, если он не указан
+
+        if self.expiry_date and self.expiry_years:
+            self.expiry_date = self.expiry_date + timedelta(days=365 * self.expiry_years)
+
         if self.number == "random":
             self.number = ''.join(random.choice(string.digits) for _ in range(16))
 

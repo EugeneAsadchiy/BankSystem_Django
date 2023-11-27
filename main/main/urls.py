@@ -22,6 +22,7 @@ admin.site.site_header="Система банка"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("reg_auf.urls")),
+    path("", include("cards.urls")),
 
 
 ]
