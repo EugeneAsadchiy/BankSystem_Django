@@ -8,22 +8,26 @@ from bank_account.models import Account
 
 
 class Card(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(default="from account")
     linked_account = models.ForeignKey(Account, on_delete=models.CASCADE)
     number = models.CharField(max_length=16,
-                              default="random",
-                              unique=True)  # Предполагается, что номер карточки состоит из 16 символов
+                              default="random")  # Предполагается, что номер карточки состоит из 16 символов
     expiry_date = models.DateField()
     cvv = models.CharField(max_length=3, default="random")
 
     def save(self, *args, **kwargs):
-        # Генерируем случайный номер карточки
-        self.number = ''.join(random.choice(string.digits) for _ in range(16))
+        self.user = self.linked_account.user.username
+        print(self.user)
+        # Генерируем случайный номер карточки, если он не указан
+        if self.number == "random":
+            self.number = ''.join(random.choice(string.digits) for _ in range(16))
 
-        # Генерируем случайный CVV
-        self.cvv = ''.join(random.choice(string.digits) for _ in range(3))
+        # Генерируем случайный CVV, если он не указан
+        if self.cvv == "random":
+            self.cvv = ''.join(random.choice(string.digits) for _ in range(3))
 
-        # Проверяем уникальность номера карточки
+        # Ограничиваем количество попыток поиска уникального номера
         while True:
             try:
                 # Пытаемся сохранить объект
