@@ -9,21 +9,21 @@
         <li><a href="#contact">Контакты</a></li>
 
         {% if request.user.is_authenticated %}
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle">{{ user.username }}</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <!-- Пункты меню для авторизованных пользователей -->
-                    <a class="dropdown-item" href="#">Профиль</a>
-                    <a class="dropdown-item" href="#">...</a>
-                    <a class="dropdown-item" href="#">Мои карты</a>
-                    <a class="dropdown-item" href="#">Мои счета</a>
-                    <a class="dropdown-item" href="#">История операций</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
-                </div>
-            </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle">{{ user.username }}</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!-- Пункты меню для авторизованных пользователей -->
+                <a class="dropdown-item" href="#">Профиль</a>
+                <a class="dropdown-item" href="#">...</a>
+                <a class="dropdown-item" href="{% url 'my_cards'%}">Мои карты</a>
+                <a class="dropdown-item" href="#">Мои счета</a>
+                <a class="dropdown-item" href="#">История операций</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+            </div>
+        </li>
         {% else %}
-            <li><a href="{% url 'login' %}">Вход</a></li>
+        <li><a href="{% url 'login' %}">Вход</a></li>
         {% endif %}
     </ul>
 </nav>

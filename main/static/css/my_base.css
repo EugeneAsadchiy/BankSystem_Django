@@ -8,11 +8,13 @@ header {
     text-align: center;
     padding: 1em 0;
 }
-footer {
-    background-color: #f4f4f4;
-    padding: 1em 0;
-    text-align: center;
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Расположить внизу контейнера */
 }
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;

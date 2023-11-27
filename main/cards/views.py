@@ -1,8 +1,11 @@
+import time
+
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 
 from bank_account.models import Account
 from cards.forms import CardForm
@@ -16,21 +19,36 @@ from cards.models import Card
 #     template_name = 'cards/order_card.html'
 #     success_url = "/main"
 
-@login_required
+# @login_required(login_url='login')
 def create_card(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Пожалуйста, авторизуйтесь, чтобы оформить карту.')
+        return redirect('login')  # Перенаправление на страницу входа
     user = request.user
-
     if request.method == 'POST':
         form = CardForm(user, request.POST)
         if form.is_valid():
             card = form.save(commit=False)
             card.user = user
             card.save()
-            return redirect('main')  # Перенаправьте на страницу успешного создания карты
+            return redirect('order_card_successful')  # Перенаправьте на страницу успешного создания карты
     else:
         form = CardForm(user)
 
     return render(request, 'cards/order_card.html', {'form': form})
+
+
+class ListCards(ListView):
+    template_name = "cards/my_cards.html"
+    model = Card  # само выберет все данные и передаст в контекст
+    context_object_name = "cards"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # filter_qs = queryset.filter(rating__gt=3) #пример
+        return queryset
+
+
 # def order_card(request):
 #     if request.method == 'POST':
 #         account_id = request.POST.get('account')
@@ -48,3 +66,5 @@ def create_card(request):
 #         return render(request, 'cards/order_card.html')
 #
 #     return render(request, 'cards/order_card.html')
+def success_url(request):
+    return render(request, 'cards/order_card_successful.html')

@@ -13,20 +13,19 @@
 <div class="container">
     <h2>Заказ карточки</h2>
     <form method="post" action="{% url 'order_card' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button id="orderButton">Оформить карту</button>
-    <div class="overlay" id="overlay">
-        <div class="popup">
-            <span class="close" id="close">&times;</span>
-            <p>Карта успешно оформлена!</p>
-        </div>
-    </div>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button id="orderButton">Оформить карту</button>
     </form>
 
-
+<!--    <div class="overlay" id="overlay">-->
+<!--        <div class="popup">-->
+<!--            <span class="close" id="close">&times;</span>-->
+<!--            <p>Карта успешно оформлена!</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--        </form>-->
 </div>
-
 <script src="{% static 'cards/js/script.js' %}"></script>
 {% endblock %}
 
