@@ -6,14 +6,21 @@
 
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
     <link rel="stylesheet" href="{% static 'css/my_base.css'%}">
-
     {% block css_additional %} {% endblock %}
 </head>
 <body>
     {% include "navbar.html" %}
 
-    {% block content%} {% endblock %}
+    {% block content%}
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %} {% endblock %}
 
 
     <section id="main-content">

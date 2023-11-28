@@ -17,12 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-admin.site.site_header="Система банка"
+admin.site.site_header = "Система банка"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("reg_auf.urls")),
     path("", include("cards.urls")),
-
+    path("", include("bank_account.urls")),
 
 ]

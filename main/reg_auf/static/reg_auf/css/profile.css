@@ -1,0 +1,65 @@
+/* Добавьте эти стили в ваш файл forms.css */
+
+/* Стили для формы */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Стили для полей формы */
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input,
+form button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: #fff;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+}
+
+.modal-content label,
+.modal-content input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modal-content input {
+    width: calc(100% - 20px);
+    padding: 8px;
+}
+
+.modal-content button {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}

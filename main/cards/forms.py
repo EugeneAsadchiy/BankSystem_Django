@@ -3,18 +3,6 @@ from .models import Card
 from .models import Account
 
 
-# class CardForm(forms.ModelForm):
-#     class Meta:
-#         model = Card
-#         fields = ["linked_account", "expiry_years"]
-#         # fields = "__all__"
-#         # exclude=["rating"]
-#         labels = {
-#             "linked_account": "Счет",
-#             "expiry_date": "Начало действия карты",
-#             "expiry_years": "Срок действия",
-#
-#         }
 class CardForm(forms.ModelForm):
     class Meta:
         model = Card

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'bank_account/css/style.css' %}">
+{% endblock %}
+
+{% block title %}
+    Мои карты
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Ваши счета</h2>
+
+        {% if accounts %}
+        <table class="card-table">
+            <thead>
+                <tr>
+                    <th>Номер счета</th>
+                    <th>Баланс</th>
+<!--                    <th>Дата окончания</th>-->
+<!--                    <th>CVV</th>-->
+<!--                    <th>Баланс</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                {% for account in accounts %}
+                    <tr>
+                        <td>{{ account.account_number }}</td>
+                        <td class="column">{{ account.balance }}</td>
+<!--                        <td>{{ card.expiry_date|date:"d F Y" }}</td>-->
+<!--                        <td>{{ card.cvv }}</td>-->
+<!--                        <td>{{ card.linked_account.balance }}</td>-->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>У вас нет счетов.</p>
+    {% endif %}
+    </div>
+{% endblock %}
