@@ -12,7 +12,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: auto;
+    margin-top: auto; /* Расположить внизу контейнера */
 }
 
 body {
@@ -22,7 +22,8 @@ body {
     box-sizing: border-box;
     background-color: #6e5858;
 }
-
+/* Стили для выпадающего меню */
+/* Стили для выпадающего меню */
 .centered-nav {
     text-align: center;
 }
@@ -44,7 +45,7 @@ body {
 }
 
 .centered-nav a:hover {
-    color: #a1a1a1;
+    color: #a1a1a1; /* Цвет ссылки при наведении */
 }
 
 .centered-nav li.dropdown {
@@ -62,11 +63,11 @@ body {
     white-space: nowrap;
     width: max-content;
     min-width: 100%;
-    flex-direction: column;
+    flex-direction: column; /* Удалите этот стиль */
 }
 .centered-nav li.dropdown .dropdown-menu a {
     display: block;
-    padding: 3px;
+    padding: 3px; /* Добавьте отступы между пунктами меню */
     color: #fbfbfb;
 }
 
@@ -78,7 +79,7 @@ body {
 
 
 .centered-nav li.dropdown:hover .dropdown-toggle {
-    color: #a1a1a1;
+    color: #a1a1a1; /* Цвет ссылки при наведении */
 }
 
 .centered-nav li.dropdown:hover .dropdown-menu {
@@ -86,19 +87,6 @@ body {
 }
 
 .centered-nav li.dropdown .dropdown-menu a:hover {
-    background-color: #6e5858;
-    color: #a1a1a1;
+    background-color: #6e5858; /* Цвет фона при наведении на пункт меню */
+    color: #a1a1a1; /* Цвет текста при наведении на пункт меню */
 }
-.centered-nav .user-menu {
-    border: 2px solid #a1a1a1;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-.centered-nav li.highlighted a {
-    font-weight: bold;
-    color: #ffffff;
-    font-size: 30px;
-
-}
-.centered-nav li.highlighted a:hover {
-    color: #a1a1a1;

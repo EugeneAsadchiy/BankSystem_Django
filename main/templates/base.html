@@ -3,35 +3,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
     <link rel="stylesheet" href="{% static 'css/my_base.css'%}">
     {% block css_additional %} {% endblock %}
 </head>
 <body>
-    {% include "navbar.html" %}
+{% include "navbar.html" %}
 
-    {% block content%}
-    {% if messages %}
-  <ul class="messages">
+{% block content%}
+{% if messages %}
+<ul class="messages">
     {% for message in messages %}
-      <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
-  </ul>
+</ul>
 {% endif %} {% endblock %}
 
+{% block section %}
 
-    <section id="main-content">
+<section id="main-content">
     <h2>О нас</h2>
     <p>Краткое описание вашего банка и его ценностей.</p>
-    </section>
+</section>
+{%endblock%}
 
-
-    <footer>
-        <p>&copy; 2023 Ваш Банк. Все права защищены.</p>
-    </footer>
+{% block include_footer %}
+<footer>
+    <p>&copy; 2023 Ваш Банк. Все права защищены.</p>
+</footer>
+{% endblock %}
 
 </body>
 </html>

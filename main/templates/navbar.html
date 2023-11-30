@@ -1,17 +1,18 @@
 <nav class="centered-nav">
     <ul>
 <!--        <li><a href="{% url 'order_card'%}">Карты</a></li>-->
+        <li class="highlighted"><a href="{%url 'main'%}">Мой банк</a></li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle">Карты</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <!-- Пункты меню для авторизованных пользователей -->
                 <a class="dropdown-item" href="{% url 'order_card'%}">Оформить карту</a>
                 <a class="dropdown-item" href="{% url 'order_account'%}">Оформить счёт</a>
-                <a class="dropdown-item" href="{% url 'my_cards'%}">Мои карты</a>
-                <a class="dropdown-item" href="{% url 'my_accounts'%}">Мои счета</a>
-                <a class="dropdown-item" href="#">История операций</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                <a class="dropdown-item" href="{% url 'transfer'%}">Перевод</a>
+<!--                <a class="dropdown-item" href="$">Перевод</a>-->
+<!--                <a class="dropdown-item" href="{% url 'my_cards'%}">Мои карты</a>-->
+<!--                <a class="dropdown-item" href="{% url 'my_accounts'%}">Мои счета</a>-->
+<!--                <a class="dropdown-item" href="#">История операций</a>-->
             </div>
         </li>
         <li><a href="#loans">Кредиты</a></li>
@@ -22,21 +23,21 @@
         <li><a href="#contact">Контакты</a></li>
 
         {% if request.user.is_authenticated %}
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle">{{ user.username }}</a>
+        <li class="dropdown user-menu">
+            <a href="#" class="dropdown-toggle ">{{ user.username }}</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <!-- Пункты меню для авторизованных пользователей -->
                 <a class="dropdown-item" href="{%url 'edit_profile'%}">Профиль</a>
                 <a class="dropdown-item" href="#">...</a>
                 <a class="dropdown-item" href="{% url 'my_cards'%}">Мои карты</a>
-                <a class="dropdown-item" href="#">Мои счета</a>
+                <a class="dropdown-item" href="{% url 'my_accounts'%}">Мои счета</a>
                 <a class="dropdown-item" href="#">История операций</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
             </div>
         </li>
         {% else %}
-        <li><a href="{% url 'login' %}">Вход</a></li>
+        <li class="user-menu"><a href="{% url 'login' %}">Вход</a></li>
         {% endif %}
     </ul>
 </nav>

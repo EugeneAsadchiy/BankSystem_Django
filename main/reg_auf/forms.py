@@ -21,7 +21,7 @@ class LoginUserForm(AuthenticationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
-    # password = None
+    password = None
 
     class Meta:
         model = User

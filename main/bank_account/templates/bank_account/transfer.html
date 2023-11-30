@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'reg_auf/css/forms.css' %}">
+{% endblock %}
+{% block content %}
+  <h2>Перевод средств</h2>
+
+  <form method="post">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% csrf_token %}
+<!--    {{ form.sender_account }}-->
+    {{ form.as_p }}
+
+    <button type="submit">Отправить</button>
+  </form>
+{% endblock %}
+{% block section %}
+
+{%endblock%}
+
+{% block include_footer %}
+
+{%endblock%}

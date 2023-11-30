@@ -2,8 +2,14 @@
 
 /* Стили для формы */
 form {
-    max-width: 400px;
-    margin: 0 auto;
+    margin: 1.5rem auto 5px;
+    width: 90%;
+    max-width: 40rem;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: white;
+    box-shadow: 0 2px 8px #3ca3c1;
 }
 
 /* Стили для полей формы */
@@ -14,8 +20,8 @@ form label {
 
 form input,
 form button {
-    width: 100%;
-    padding: 8px;
+    width: 80%;
+    padding: 10px;
     margin-bottom: 10px;
 }
 

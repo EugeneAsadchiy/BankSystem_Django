@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.http import request
 from django.shortcuts import render, redirect
 from .forms import RegisterUserForm, LoginUserForm, CustomUserChangeForm
@@ -12,6 +12,16 @@ from django.contrib.auth.models import User
 
 
 # Create your views here.
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('change-password-success')
+    template_name = "reg_auf/change-password.html"
+
+
+def password_success(request):
+    return render(request, 'reg_auf/change-password-success.html')
+
+
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     success_url = reverse_lazy('login')
@@ -45,16 +55,16 @@ def logout_user(request):
     return redirect("login")
 
 
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Обновление сессии после смены пароля
-            return redirect('change_password_success')
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'change_password.html', {'form': form})
+# def change_password(request):
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(request.user, request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request, user)  # Обновление сессии после смены пароля
+#             return redirect('change_password_success')
+#     else:
+#         form = PasswordChangeForm(request.user)
+#     return render(request, 'change_password.html', {'form': form})
 
 
 def main(request):

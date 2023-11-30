@@ -7,8 +7,8 @@ from django.shortcuts import render, redirect
 
 from django.views.generic import CreateView, ListView
 
-from bank_account.forms import AccountForm
-from bank_account.models import Account
+from bank_account.forms import AccountForm, TransferForm
+from bank_account.models import Account, Transaction
 
 
 @login_required(login_url='login')
@@ -35,6 +35,48 @@ class ListAccounts(LoginRequiredMixin, ListView):
         # filter_qs = queryset.filter(rating__gt=3) #пример
         user = self.request.user
         return queryset.filter(user=user)
+
+
+@login_required(login_url='login')
+def transfer_view(request):
+    if request.method == 'POST':
+        form = TransferForm(request.user, request.POST)
+        if form.is_valid():
+            sender_account = form.cleaned_data['sender_account']
+            receiver = form.cleaned_data['receiver']
+            amount = form.cleaned_data['amount']
+            print(receiver)
+            # Проверка наличия пользователя с указанным счетом
+            try:
+                receiver_account = Account.objects.get(account_number=receiver)
+            except Account.DoesNotExist:
+                messages.error(request, 'Пользователь не найден')
+                return redirect('transfer')
+            # Проверка достаточно ли средств
+            # try:
+            #     sender_account = Account.objects.get(user=request.user)
+            # except Account.MultipleObjectsReturned:
+            #     messages.error(request, "У вас два счета")
+            #     return redirect('transfer')
+            if sender_account.balance >= amount:
+                # Выполнение перевода
+                sender_account.balance -= amount
+                receiver_account.balance += amount
+
+                sender_account.save()
+                receiver_account.save()
+
+                # Запись транзакции
+                Transaction.objects.create(sender=sender_account, receiver=receiver_account, amount=amount)
+
+                messages.success(request, 'Перевод успешно выполнен')
+                return redirect('transfer')
+            else:
+                messages.error(request, 'Недостаточно средств для выполнения перевода')
+    else:
+        form = TransferForm(user=request.user)
+
+    return render(request, 'bank_account/transfer.html', {'form': form})
 
 
 def success_url(request):

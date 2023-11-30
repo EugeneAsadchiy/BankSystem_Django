@@ -2,65 +2,24 @@
 {% load static %}
 
 {% block css_additional %}
-    <link rel="stylesheet" href="{% static 'reg_auf/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'reg_auf/css/forms.css' %}">
 {% endblock %}
 
 {% block content %}
-
-  <h2>Edit Profile</h2>
-  <form method="post" action="">
+  <h1 style="text-align: center;">Профиль</h1>
+  <form method="post" action="" novalidate>
     {% csrf_token %}
     {{ form.as_p }}
+    <a href="{% url 'change-password' %}">Сменить пароль?</a><br><br>
     <button type="submit">Сохранить</button>
   </form>
-  <a href="{% url 'change_password' %}">Сменить пароль</a>
+
 {% endblock %}
+{% block section %}
 
+{%endblock%}
 
-<!--<script>-->
-<!--// Ваш JavaScript-код для управления отображением модального окна и отправки формы-->
-<!--var changePasswordButton = document.getElementById('changePasswordButton');-->
-<!--var changePasswordModal = document.getElementById('changePasswordModal');-->
-<!--var closePasswordModal = document.getElementById('closePasswordModal');-->
-<!--var changePasswordForm = document.getElementById('changePasswordForm');-->
+{% block include_footer %}
 
-<!--changePasswordButton.onclick = function() {-->
-<!--  changePasswordModal.style.display = 'block';-->
-<!--};-->
+{%endblock%}
 
-<!--closePasswordModal.onclick = function() {-->
-<!--  changePasswordModal.style.display = 'none';-->
-<!--};-->
-
-<!--// Закрывать окно, если пользователь кликнул вне модального окна-->
-<!--window.onclick = function(event) {-->
-<!--  if (event.target === changePasswordModal) {-->
-<!--    changePasswordModal.style.display = 'none';-->
-<!--  }-->
-<!--};-->
-
-<!--// Отправка формы через AJAX-->
-<!--changePasswordForm.onsubmit = function(event) {-->
-<!--  event.preventDefault();-->
-<!--  var formData = new FormData(changePasswordForm);-->
-<!--  fetch('{% url "change_password" %}', {-->
-<!--    method: 'POST',-->
-<!--    body: formData,-->
-<!--    headers: {-->
-<!--      'X-Requested-With': 'XMLHttpRequest',-->
-<!--    },-->
-<!--  })-->
-<!--  .then(response => response.json())-->
-<!--  .then(data => {-->
-<!--    if (data.success) {-->
-<!--      alert('Пароль успешно изменен!');-->
-<!--      changePasswordModal.style.display = 'none';-->
-<!--    } else {-->
-<!--      alert('Ошибка смены пароля. Пожалуйста, проверьте введенные данные.');-->
-<!--    }-->
-<!--  })-->
-<!--  .catch(error => {-->
-<!--    console.error('Произошла ошибка:', error);-->
-<!--  });-->
-<!--};-->
-<!--</script>-->
