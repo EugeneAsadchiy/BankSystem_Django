@@ -24,5 +24,6 @@ urlpatterns = [
     path("", include("reg_auf.urls")),
     path("", include("cards.urls")),
     path("", include("bank_account.urls")),
+    path("", include("credit.urls")),
 
 ]

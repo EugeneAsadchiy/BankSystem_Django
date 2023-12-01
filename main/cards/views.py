@@ -15,9 +15,6 @@ from cards.models import Card
 
 @login_required(login_url='login')
 def create_card(request):
-    # if not request.user.is_authenticated:
-    #     messages.warning(request, 'Пожалуйста, авторизуйтесь, чтобы оформить карту.')
-    #     return redirect('login')  # Перенаправление на страницу входа
     user = request.user
     if request.method == 'POST':
         form = CardForm(user, request.POST)

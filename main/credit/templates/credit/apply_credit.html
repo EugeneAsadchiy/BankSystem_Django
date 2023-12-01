@@ -1,0 +1,18 @@
+<!-- apply_credit.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" href=" {% static 'credit/css/style.css' %}">
+
+{% endblock %}
+{% block content %}
+<h2>Оформление кредита</h2>
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Подать заявку</button>
+    </form>
+</div>
+{% endblock %}

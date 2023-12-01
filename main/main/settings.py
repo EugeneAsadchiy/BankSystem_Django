@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'reg_auf',
     'bank_account',
     'cards',
+    'credit',
 
 
 ]
