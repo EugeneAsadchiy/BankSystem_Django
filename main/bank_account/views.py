@@ -52,12 +52,6 @@ def transfer_view(request):
             except Account.DoesNotExist:
                 messages.error(request, 'Пользователь не найден')
                 return redirect('transfer')
-            # Проверка достаточно ли средств
-            # try:
-            #     sender_account = Account.objects.get(user=request.user)
-            # except Account.MultipleObjectsReturned:
-            #     messages.error(request, "У вас два счета")
-            #     return redirect('transfer')
             if sender_account.balance >= amount:
                 # Выполнение перевода
                 sender_account.balance -= amount

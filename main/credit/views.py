@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
+
+import cards.models
 from cards.models import Card
 from .models import Credit
 from .forms import CreditForm
@@ -22,7 +24,7 @@ def apply_credit(request):
             linked_account.balance += credit.amount
             linked_account.save()
             card = Card.objects.create(linked_account=linked_account, expiry_date=datetime.now(),
-                                       expiry_years=credit.term_months)
+                                       expiry_years=credit.term_months, card_type="credit")
 
             credit.linked_card = card
             credit.save()

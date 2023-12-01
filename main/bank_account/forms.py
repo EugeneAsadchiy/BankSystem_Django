@@ -31,7 +31,8 @@ class TransferForm(forms.Form):
     sender_account = forms.ModelChoiceField(
         queryset=Account.objects.none(),
         # widget=forms.HiddenInput(),
-        label="Счет"
+        label="Счет",
+        empty_label='Выберите счёт'
     )
     receiver = forms.CharField(max_length=150, label="Номер счёта/карты",
                                validators=[

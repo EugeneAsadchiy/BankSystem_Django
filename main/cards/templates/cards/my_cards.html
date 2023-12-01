@@ -19,6 +19,7 @@
                 <tr>
                     <th>Номер счета</th>
                     <th>Номер карты</th>
+                    <th>Вид карты</th>
                     <th>Дата окончания</th>
                     <th>CVV</th>
                     <th>Баланс</th>
@@ -29,6 +30,11 @@
                     <tr>
                         <td>{{ card.linked_account.account_number }}</td>
                         <td class="column">{{ card.number }}</td>
+                        {%if card.card_type == "credit"%}
+                            <td>Кредитная</td>
+                        {%else%}
+                             <td>Дебетовая</td>
+                        {%endif%}
                         <td>{{ card.expiry_date|date:"d F Y" }}</td>
                         <td>{{ card.cvv }}</td>
                         <td>{{ card.linked_account.balance }}</td>

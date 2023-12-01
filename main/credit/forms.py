@@ -9,6 +9,7 @@ class CreditForm(forms.ModelForm):
     linked_account = forms.ModelChoiceField(
         queryset=Account.objects.none(),
         label='Выберите счёт',
+        empty_label='Выберите счёт'
         # required=True,
     )
 

@@ -9,6 +9,10 @@ from bank_account.models import Account
 
 
 class Card(models.Model):
+    CARD_TYPE_CHOICES = [
+        ('debit', 'Дебетовая'),
+        ('credit', 'Кредитная'),
+    ]
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
     user = models.CharField(default="from account")
     linked_account = models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -17,6 +21,8 @@ class Card(models.Model):
     expiry_date = models.DateField(default="admin check")
     expiry_years = models.PositiveIntegerField(default=0)
     cvv = models.CharField(max_length=3, default="random")
+    card_type = models.CharField(max_length=10, choices=CARD_TYPE_CHOICES, default='debit')
+    is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         self.user = self.linked_account.user.username
@@ -44,4 +50,4 @@ class Card(models.Model):
                 break
 
     def __str__(self):
-        return f"{self.linked_account.account_number} | {self.expiry_date} | {self.cvv}"
+        return f"{self.linked_account.account_number} | {self.number} | {self.expiry_date} | {self.card_type}"
