@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'cards/css/style.css' %}">
+{% endblock %}
+
+{% block title %}
+    Мои карты
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Информация о кредитах</h2>
+
+        {% if credits %}
+        <table class="card-table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Баланс</th>
+                    <th>Проценты</th>
+                    <th>Срок погашения</th>
+                    <th>Дата окончания</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for credit in credits %}
+                    <tr>
+                        <td>{{ credit.name }}</td>
+                        <td>{{ credit.balance }} руб</td>
+                        <td class="column">{{ credit.interest_rate }} %</td>
+                        <td>{{ credit.term_years }} лет</td>
+                        <td>{{ credit.date|date:"d F Y" }}</td>
+
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>У вас нет оформленных кредитов.</p>
+        {% endif %}
+    </div>
+{% endblock %}

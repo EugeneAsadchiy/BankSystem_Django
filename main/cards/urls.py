@@ -11,7 +11,8 @@ urlpatterns = [
     # path("order_card/", views.CardView.as_view(), name="order_card"),
     path("my_cards/", views.ListCards.as_view(), name="my_cards"),
     path("order_card_successful/", views.success_url, name="order_card_successful"),
-    path("order_card/", views.create_card, name="order_card"),
+    path("order_card_debit/", views.create_card_debit, name="order_card_debit"),
+    path("order_card_credit/", views.create_card_credit, name="order_card_credit"),
 
 
 ]

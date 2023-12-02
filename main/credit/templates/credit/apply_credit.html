@@ -3,47 +3,30 @@
 {% load static %}
 
 {% block css_additional %}
-<link rel="stylesheet" href=" {% static 'credit/css/style.css' %}">
-
+<link rel="stylesheet" href="{% static 'credit/css/style.css' %}">
+<!--<script src="{% static 'credit/js/credit_script.js' %}"></script>-->
 {% endblock %}
+
 {% block content %}
 <h2>Оформление кредита</h2>
-
 <div class="container">
-    <form method="post">
-        {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-        <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Подать заявку</button>
-    </form>
-</div>
-<div class="container">
-    <div class="offer" data-offer-id="1">
-        <div class="offer-title">Кредит на покупку жилья</div>
-        <div class="offer-details">
-            <p>Сумма: 1,000,000 руб.</p>
-            <p>Процентная ставка: 7%</p>
-            <p>Срок: 10 лет</p>
-        </div>
-        <button class="btn btn-apply">Оформить</button>
-    </div>
 
-    <div class="offer" data-offer-id="2">
-        <div class="offer-title">Автокредит</div>
-        <div class="offer-details">
-            <p>Сумма: 500,000 руб.</p>
-            <p>Процентная ставка: 5%</p>
-            <p>Срок: 5 лет</p>
+    <!-- apply_credit.html -->
+<form method="post" action="{% url 'apply_credit' %}">
+    {% csrf_token %}
+    {% for offer in offers %}
+        <div class="offer">
+<!--            <input type="hidden" name="offer_id" value="{{ offer.id }}">-->
+            <h3>{{ offer.name }}</h3>
+            <p>Сумма: {{ offer.amount }}</p>
+            <p>Процентная ставка: от {{ offer.interest_rate }}%</p>
+            <p>Срок до {{ offer.term_years }} лет</p>
+            <button type="submit" name="offer_id" value="{{ offer.id }}">Оформить</button>
         </div>
-        <button class="btn btn-apply">Оформить</button>
-    </div>
+    <br>
+    {% endfor %}
+</form>
 
-    <!-- Добавьте еще предложений по аналогии -->
+
 </div>
 {% endblock %}

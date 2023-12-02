@@ -14,7 +14,7 @@ from cards.models import Card
 
 
 @login_required(login_url='login')
-def create_card(request):
+def create_card_debit(request):
     user = request.user
     if request.method == 'POST':
         form = CardForm(user, request.POST)
@@ -26,7 +26,24 @@ def create_card(request):
     else:
         form = CardForm(user)
 
-    return render(request, 'cards/order_card.html', {'form': form})
+    return render(request, 'cards/order_card_debit.html', {'form': form})
+
+
+@login_required(login_url='login')
+def create_card_credit(request):
+    user = request.user
+    if request.method == 'POST':
+        form = CardForm(user, request.POST)
+        if form.is_valid():
+            card = form.save(commit=False)
+            card.user = user
+            card.card_type = "credit"
+            card.save()
+            return redirect('order_card_successful')  # Перенаправьте на страницу успешного создания карты
+    else:
+        form = CardForm(user)
+
+    return render(request, 'cards/order_card_credit.html', {'form': form})
 
 
 # @login_required(login_url='login')
@@ -38,6 +55,7 @@ class ListCards(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Card.objects.filter(user=self.request.user)
+
 
 # def transact(request):
 

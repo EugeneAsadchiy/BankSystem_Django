@@ -1,18 +1,15 @@
 <nav class="centered-nav">
     <ul>
-<!--        <li><a href="{% url 'order_card'%}">Карты</a></li>-->
+
         <li class="highlighted"><a href="{%url 'main'%}">Мой банк</a></li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle">Карты</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <!-- Пункты меню для авторизованных пользователей -->
-                <a class="dropdown-item" href="{% url 'order_card'%}">Оформить карту</a>
+                <a class="dropdown-item" href="{% url 'order_card_debit'%}">Дебетовые карты</a>
+                <a class="dropdown-item" href="{% url 'order_card_credit'%}">Кредитные карты</a>
                 <a class="dropdown-item" href="{% url 'order_account'%}">Оформить счёт</a>
-                <a class="dropdown-item" href="{% url 'transfer'%}">Перевод</a>
-<!--                <a class="dropdown-item" href="$">Перевод</a>-->
-<!--                <a class="dropdown-item" href="{% url 'my_cards'%}">Мои карты</a>-->
-<!--                <a class="dropdown-item" href="{% url 'my_accounts'%}">Мои счета</a>-->
-<!--                <a class="dropdown-item" href="#">История операций</a>-->
+                <a class="dropdown-item" href="{% url 'transfer'%}">Транзакция</a>
             </div>
         </li>
         <li><a href="{% url 'apply_credit'%}">Кредиты</a></li>
@@ -28,7 +25,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <!-- Пункты меню для авторизованных пользователей -->
                 <a class="dropdown-item" href="{%url 'edit_profile'%}">Профиль</a>
-                <a class="dropdown-item" href="#">...</a>
+                <a class="dropdown-item" href="{% url 'my_credits'%}">Мои кредиты</a>
                 <a class="dropdown-item" href="{% url 'my_cards'%}">Мои карты</a>
                 <a class="dropdown-item" href="{% url 'my_accounts'%}">Мои счета</a>
                 <a class="dropdown-item" href="#">История операций</a>

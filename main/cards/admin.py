@@ -4,7 +4,7 @@ from .models import Card
 
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
-    list_display = ['linked_account', 'number', 'cvv']
+    list_display = ['linked_account', 'card_type', 'number', 'cvv']
     list_editable = []
     exclude = ["user"]
     readonly_fields = ["number", "cvv"]
