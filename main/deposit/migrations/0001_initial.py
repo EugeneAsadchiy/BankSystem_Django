@@ -16,15 +16,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Credit',
+            name='Deposit',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='Кредит')),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
+                ('amount', models.IntegerField()),
+                ('term_months', models.PositiveIntegerField(default=0)),
                 ('interest_rate', models.DecimalField(decimal_places=2, max_digits=5)),
-                ('term_years', models.PositiveIntegerField(default=0)),
-                ('balance', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('date', models.DateField(default=django.utils.timezone.now)),
+                ('start_date', models.DateField(default=django.utils.timezone.now)),
+                ('end_date', models.DateField(blank=True, null=True)),
+                ('expected_sum', models.IntegerField(default=0)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

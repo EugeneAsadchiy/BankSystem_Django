@@ -14,7 +14,7 @@ class Credit(models.Model):
     name = models.CharField(default="Кредит")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     interest_rate = models.DecimalField(max_digits=5, decimal_places=2)
-    term_years = models.IntegerField()
+    term_years = models.PositiveIntegerField(default=0)
     balance = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField(default=django.utils.timezone.now)
 

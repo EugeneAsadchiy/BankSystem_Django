@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_additional %}
+<link rel="stylesheet" href="{% static 'deposit/css/style.css' %}">
+<!--<script src="{% static 'credit/js/credit_script.js' %}"></script>-->
+{% endblock %}
+
+{% block content %}
+<h2>Оформление вклада</h2>
+<div class="container">
+
+
+<form method="post" action="{% url 'apply_deposit' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Оформить вклад</button>
+</form>
+</div>
+
+{% endblock %}

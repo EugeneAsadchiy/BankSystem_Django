@@ -60,7 +60,7 @@ def apply_credit(request):
         # else:
         #     print("popa")
         #     # Если форма не прошла валидацию, вернем страницу с формой и ошибками
-        #     return render(request, 'credit/apply_credit.html', context)
+        #     return render(request, 'credit/apply_deposit.html', context)
 
     # Если запрос не POST (например, GET), просто отрисуем страницу с формой
     return render(request, 'credit/apply_credit.html', context)

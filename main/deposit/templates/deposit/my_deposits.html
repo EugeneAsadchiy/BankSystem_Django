@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'deposit/css/style.css' %}">
+{% endblock %}
+
+{% block title %}
+    Мои вклады
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Информация о вкладах</h2>
+
+        {% if deposits %}
+        <table class="card-table">
+            <thead>
+                <tr>
+                    <th>Сумма вклада</th>
+                    <th>Срок вклада</th>
+                    <th>Ставка %</th>
+                    <th>Дата начала</th>
+                    <th>Дата окончания</th>
+<!--                    <th>Ожидаемые накопления</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                {% for deposit in deposits %}
+                    <tr>
+                        <td>{{ deposit.amount }}</td>
+                        <td>{{ deposit.term_months }} месяцев</td>
+                        <td class="column">{{ deposit.interest_rate }} %</td>
+                        <td>{{ deposit.start_date|date:"d F Y"}} </td>
+                        <td>{{ deposit.end_date|date:"d F Y"}}</td>
+<!--                        <td>{{ deposit.end_date|date:"d F Y"}}</td>-->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>У вас нет оформленных вкладов.</p>
+        {% endif %}
+    </div>
+{% endblock %}

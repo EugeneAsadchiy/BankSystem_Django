@@ -13,10 +13,8 @@
             </div>
         </li>
         <li><a href="{% url 'apply_credit'%}">Кредиты</a></li>
-        <li><a href="#deposits">Вклады</a></li>
+        <li><a href="{% url 'apply_deposit'%}">Вклады</a></li>
         <li><a href="#online-bank">Онлайн-банк</a></li>
-        <li><a href="#insurance">Страхование</a></li>
-        <li><a href="#investments">Инвестиции</a></li>
         <li><a href="#contact">Контакты</a></li>
 
         {% if request.user.is_authenticated %}
@@ -28,6 +26,7 @@
                 <a class="dropdown-item" href="{% url 'my_credits'%}">Мои кредиты</a>
                 <a class="dropdown-item" href="{% url 'my_cards'%}">Мои карты</a>
                 <a class="dropdown-item" href="{% url 'my_accounts'%}">Мои счета</a>
+                <a class="dropdown-item" href="{% url 'my_deposits'%}">Мои вклады</a>
                 <a class="dropdown-item" href="#">История операций</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>

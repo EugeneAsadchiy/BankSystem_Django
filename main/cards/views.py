@@ -57,8 +57,5 @@ class ListCards(LoginRequiredMixin, ListView):
         return Card.objects.filter(user=self.request.user)
 
 
-# def transact(request):
-
-
 def success_url(request):
     return render(request, 'cards/order_card_successful.html')
