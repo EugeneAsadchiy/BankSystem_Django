@@ -2,11 +2,10 @@
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect
-
-from cards.models import Card
+from history.models import History
 from .models import Credit
-
 from django.views.generic import ListView
 
 
@@ -34,35 +33,15 @@ def apply_credit(request):
                                        interest_rate=offers[offer_id]["interest_rate"],
                                        term_years=offers[offer_id]["term_years"],
                                        balance=offers[offer_id]["amount"])
-        # date = datetime.now() + timedelta(days=365 * offers[offer_id]["term_years"])
 
-        # card = Card.objects.create(linked_account=linked_account, expiry_date=datetime.now(),
-        #                            expiry_years=credit.term_months, card_type="credit")
-        # credit.linked_card = card
         credit.save()
-        # form = CreditForm(request.user, request.POST)
-        # if form.is_valid():
-        #     print("pizda")
-        #     credit = form.save(commit=False)
-        #     credit.user = request.user
-        #     credit.balance = credit.amount
-        #
-        #     linked_account = form.cleaned_data['linked_account']
-        #     linked_account.balance += credit.amount
-        #     linked_account.save()
-        #     card = Card.objects.create(linked_account=linked_account, expiry_date=datetime.now(),
-        #                                expiry_years=credit.term_months, card_type="credit")
-        #
-        #     credit.linked_card = card
-        #     credit.save()
-        #     messages.success(request, 'Кредит успешно оформлен.')
+        action_type = "credit"  # Замените на актуальный тип действия
+        # history = History.objects.create(user=request.user, action_type=action_type, object_id=deposit.pk)
+        history = History.objects.create(user=request.user, action_type=action_type,
+                                         content_type=ContentType.objects.get_for_model(Credit),
+                                         object_id=credit.id, link=credit)
+        history.save()
         return redirect('apply_credit_successful')
-        # else:
-        #     print("popa")
-        #     # Если форма не прошла валидацию, вернем страницу с формой и ошибками
-        #     return render(request, 'credit/apply_deposit.html', context)
-
-    # Если запрос не POST (например, GET), просто отрисуем страницу с формой
     return render(request, 'credit/apply_credit.html', context)
 
 

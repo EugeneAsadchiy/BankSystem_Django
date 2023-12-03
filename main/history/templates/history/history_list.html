@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'history/css/style.css' %}">
+{% endblock %}
+
+{% block title %}
+    Моя история
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Информация о действиях</h2>
+
+        {% if histories %}
+        <table class="card-table">
+            <thead>
+                <tr>
+                    <th>Вид услуги</th>
+<!--                    <th>Срок вклада</th>-->
+                    <th>Дата</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for history in histories %}
+                    <tr>
+                        <td>{{ history.action_type }}</td>
+<!--                        <td>{{ history.term_months }} месяцев</td>-->
+                        <td>{{ history.timestamp|date:"d F Y"}} </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>У вас нет истории </p>
+        {% endif %}
+    </div>
+{% endblock %}

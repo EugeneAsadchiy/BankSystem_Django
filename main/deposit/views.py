@@ -1,11 +1,13 @@
-# deposit/views.py
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
+from history.models import History
 from .forms import DepositForm
 from .models import Deposit
-from django.http import JsonResponse
 
 
 class ListDeposits(LoginRequiredMixin, ListView):
@@ -18,6 +20,7 @@ class ListDeposits(LoginRequiredMixin, ListView):
         return Deposit.objects.filter(user=self.request.user)
 
 
+@login_required(login_url='login')
 def create_deposit(request):
     if request.method == 'POST':
         form = DepositForm(request.POST)
@@ -25,7 +28,15 @@ def create_deposit(request):
             deposit = form.save(commit=False)
             deposit.user = request.user
             deposit.save()
-            return redirect('apply_deposit_successful')
+            # Записываем действие в историю
+            action_type = "deposit"  # Замените на актуальный тип действия
+            # history = History.objects.create(user=request.user, action_type=action_type, object_id=deposit.pk)
+            history = History.objects.create(user=request.user, action_type=action_type,
+                                             content_type=ContentType.objects.get_for_model(Deposit),
+                                             object_id=deposit.id, link=deposit)
+            history.save()
+
+        return redirect('apply_deposit_successful')
     else:
         form = DepositForm()
     return render(request, 'deposit/apply_deposit.html', {'form': form})
@@ -33,6 +44,3 @@ def create_deposit(request):
 
 def success_url(request):
     return render(request, 'deposit/apply_deposit_successful.html')
-
-
-

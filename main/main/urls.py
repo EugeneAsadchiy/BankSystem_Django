@@ -14,12 +14,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+
+from main import settings
 
 admin.site.site_header = "Система банка"
 
 urlpatterns = [
+    # path('__debug__/', include("debug_toolbar.urls")),
     path('admin/', admin.site.urls),
     path("", include("reg_auf.urls")),
     path("", include("cards.urls")),
@@ -28,3 +32,11 @@ urlpatterns = [
     path("", include("deposit.urls")),
 
 ]
+# if settings.DEBUG:
+#     import debug_toolbar
+#
+#     urlpatterns = [
+#                       path('__debug__/', include(debug_toolbar.urls)),
+#                   ] + urlpatterns
+#
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

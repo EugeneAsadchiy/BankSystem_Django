@@ -50,4 +50,4 @@ class Card(models.Model):
                 break
 
     def __str__(self):
-        return f"{self.linked_account.account_number} | {self.number} | {self.expiry_date} | {self.card_type}"
+        return f"Number: {self.number} | {self.expiry_date} | {self.card_type}"

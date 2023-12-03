@@ -4,6 +4,7 @@ import django
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class Deposit(models.Model):
@@ -16,13 +17,12 @@ class Deposit(models.Model):
     expected_sum = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.user.username}'s Deposit"
+        return f"Deposit {self.user.username} - {self.amount} {self.end_date}"
 
     def calculate_deposit(self, amount, term_months, interest_rate):
         monthly_interest_rate = interest_rate / (12 * 100)
         final_amount = amount * (1 + monthly_interest_rate) ** term_months
         return final_amount
-
 
     def save(self, *args, **kwargs):
         # Рассчитываем дату окончания вклада
