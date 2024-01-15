@@ -18,8 +18,6 @@ class Credit(models.Model):
     balance = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField(default=django.utils.timezone.now)
 
-    # linked_card = models.ForeignKey(Card, on_delete=models.SET_NULL, null=True, blank=True,
-    #                                 verbose_name='Связанная карточка')
     def save(self, *args, **kwargs):
         if self.date and self.term_years:
             self.date = datetime.now() + timedelta(days=365 * self.term_years)

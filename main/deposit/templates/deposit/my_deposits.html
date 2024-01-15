@@ -22,7 +22,7 @@
                     <th>Ставка %</th>
                     <th>Дата начала</th>
                     <th>Дата окончания</th>
-<!--                    <th>Ожидаемые накопления</th>-->
+                    <th>Ожидаемые накопления</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +33,7 @@
                         <td class="column">{{ deposit.interest_rate }} %</td>
                         <td>{{ deposit.start_date|date:"d F Y"}} </td>
                         <td>{{ deposit.end_date|date:"d F Y"}}</td>
+                        <td>{{ deposit.expected_sum}}</td>
 <!--                        <td>{{ deposit.end_date|date:"d F Y"}}</td>-->
                     </tr>
                 {% endfor %}

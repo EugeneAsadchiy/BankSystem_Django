@@ -24,13 +24,12 @@ def create_card_debit(request):
             card = form.save(commit=False)
             card.user = user
             card.save()
-            action_type = "debit_card"  # Замените на актуальный тип действия
-            # history = History.objects.create(user=request.user, action_type=action_type, object_id=deposit.pk)
+            action_type = "debit_card"
             history = History.objects.create(user=request.user, action_type=action_type,
                                              content_type=ContentType.objects.get_for_model(Card),
                                              object_id=card.id, link=card)
             history.save()
-            return redirect('order_card_successful')  # Перенаправьте на страницу успешного создания карты
+            return redirect('order_card_successful')
     else:
         form = CardForm(user)
 

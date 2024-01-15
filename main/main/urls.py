@@ -30,6 +30,7 @@ urlpatterns = [
     path("", include("bank_account.urls")),
     path("", include("credit.urls")),
     path("", include("deposit.urls")),
+    path("", include("history.urls")),
 
 ]
 # if settings.DEBUG:
